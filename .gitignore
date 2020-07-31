@@ -1,0 +1,11 @@
+# ignoring root modules
+
+node_modules/   
+
+# env
+.env
+
+
+
+# vscode
+.vscode
