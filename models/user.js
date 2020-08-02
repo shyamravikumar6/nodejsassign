@@ -60,7 +60,15 @@ userSchema.virtual("password")
 
 userSchema.methods={                                                         
 
- securePassword:(plainPassword)=>{
+
+    Authenticate: function(plainPassword){
+        
+        return this.securePassword(plainPassword) === this.encryptPassword;
+   }, 
+
+
+
+ securePassword:function(plainPassword){
         if(!plainPassword) return "";
         try {
             // @ts-ignore
@@ -70,13 +78,9 @@ userSchema.methods={
         } catch (err) {
             return "";
         }
-    },
+    }
 
-    authenticate:function(plainPassword){
-        
-        return this.securePassword(plainPassword)===this.encryptPassword;
-   }, 
-
+  
 
    
 };
