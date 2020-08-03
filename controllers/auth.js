@@ -38,7 +38,7 @@ exports.signin =(req,res)=>{
        });   
      } 
 
-     User.findOne(email,(err,user)=>{
+     User.findOne({email},(err,user)=>{
             if(err||!user){
               return  res.status(400).json({
                   error:"email is not regiserted with us",
@@ -47,7 +47,7 @@ exports.signin =(req,res)=>{
             }
             
             
-            // @ts-ignore
+            
             if(!user.Authenticate(password)){
                 return res.status(422).json({
                     error:"password is not matched"
@@ -55,10 +55,10 @@ exports.signin =(req,res)=>{
             }
 
              const token = jwt.sign({_id:user._id},process.env.SECRET);
-             // @ts-ignore
-             res.cookie("token",token,{expire:new Date() + 999});
-             // @ts-ignore
-             const {_id,firstname,email,role}= user;
+            
+             res.cookie("token",token,{expire:new Date() + '999'});
+            
+             const {_id,role,firstname,email}= user;
              return res.json({token,user:{_id,firstname,email,role}})
      });
 }

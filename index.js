@@ -23,3 +23,4 @@ app.use("/api",authroutes);
 app.listen(port,()=>{console.log(`mongo db running on port ${port}`);
 });
 
+    
