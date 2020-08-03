@@ -4,13 +4,20 @@ var jwt = require('jsonwebtoken');
 // @ts-ignore
 var expjwt =require('express-jwt');
 exports.signout=(req,res)=>{
-     // @ts-ignore
-     const user = new User(req.body);
+     
+    res.clearCookie();
+     //const user = new User(req.body);
 
     res.json({
            message:"users singing out"
       });
 }
+
+exports.isSigned=expjwt({
+    secret:process.env.SECRET,
+    userProperty:"auth"
+
+})
 
 exports.signup=(req,res)=>{
     const errors = validationResult(req);
