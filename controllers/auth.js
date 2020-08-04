@@ -2,7 +2,7 @@ const User = require('../models/user');
 const {validationResult} = require('express-validator');
 var jwt = require('jsonwebtoken');
 // @ts-ignore
-var expjwt =require('express-jwt');
+var expressjwt =require('express-jwt');
 exports.signout=(req,res)=>{
      
     res.clearCookie();
@@ -13,11 +13,6 @@ exports.signout=(req,res)=>{
       });
 }
 
-exports.isSigned=expjwt({
-    secret:process.env.SECRET,
-    userProperty:"auth"
-
-})
 
 exports.signup=(req,res)=>{
     const errors = validationResult(req);
@@ -69,3 +64,5 @@ exports.signin =(req,res)=>{
              return res.json({token,user:{_id,firstname,email,role}})
      });
 }
+
+exports.isSigned =expressjwt({secret:process.env.SECRET,algorithms: ['HS256'],userProperty:"auth"});
